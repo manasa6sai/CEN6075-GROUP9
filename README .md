@@ -1,4 +1,4 @@
-# Verified Shopping Cart System in Dafny : CEN6075 GROUP9 PROJECT - TEAM MEMBERS : MANASA , MANYA
+# Verified Shopping Cart System in Dafny : TEAM MEMBERS - MANASA , MANYA , AKSHAY
 
 ## Overview
 
