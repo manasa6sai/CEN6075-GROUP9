@@ -1,4 +1,6 @@
-# Verified Shopping Cart System in Dafny : TEAM MEMBERS - MANASA , MANYA , AKSHAY
+# Verified Shopping Cart System in Dafny 
+
+## GROUP 9 :  Manasa , Manya , Akshay
 
 ## Overview
 
