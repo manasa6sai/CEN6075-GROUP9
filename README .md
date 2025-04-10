@@ -1,4 +1,4 @@
-# Verified Shopping Cart System in Dafny
+# Verified Shopping Cart System in Dafny : CEN6075 GROUP9 PROJECT - TEAM MEMBERS : MANASA , MANYA
 
 ## Overview
 
@@ -60,5 +60,5 @@ This project is available under the MIT License.
 
 ## Acknowledgments
 
-- CEN6075 GROUP9 PROJECT - TEAM MEMBERS : MANASA , MANYA , AKSHAY
+- The Dafny team for creating a powerful formal verification language
 - The formal methods community for advancing the field of software verification
