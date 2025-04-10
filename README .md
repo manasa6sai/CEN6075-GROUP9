@@ -43,8 +43,8 @@ To run and verify this code, you'll need:
 ### Running the Code
 
 1. Clone this repository
-2. Verify the implementation with: `dafny /verify shopping_cart.dfy`
-3. Run the implementation with: `dafny /compile:3 /run shopping_cart.dfy`
+2. Verify the implementation with: `dafny /verify Group9DafnySpecification.dfy`
+3. Run the implementation with: `dafny /compile:3 /run Group9DafnySpecification.dfy`
 
 ## Documentation
 
