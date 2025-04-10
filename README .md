@@ -60,5 +60,5 @@ This project is available under the MIT License.
 
 ## Acknowledgments
 
-- The Dafny team for creating a powerful formal verification language
+- CEN6075 GROUP9 PROJECT - TEAM MEMBERS : MANASA , MANYA , AKSHAY
 - The formal methods community for advancing the field of software verification
