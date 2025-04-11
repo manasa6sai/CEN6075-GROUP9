@@ -62,9 +62,9 @@ method AddItem(item: Item, quantity: int)
   assert ValidItems(items);  // Ensure validity before adding an item
   if item.id in items {
     var existing := items[item.id];
-    assert ValidCartItem(existing);  // ✅ So we can trust existing.quantity > 0
+    assert ValidCartItem(existing);  // So we can trust existing.quantity > 0
     var newQ := existing.quantity + quantity;
-    assert newQ > 0;                 // ✅ Dafny can now prove this
+    assert newQ > 0;                 // Dafny can now prove this
     var updated := new CartItem(item, newQ);
     items := items[item.id := updated];
   } else {
