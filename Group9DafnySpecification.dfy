@@ -1,8 +1,10 @@
+// This class is defined to represent the noraml item which we buy from the store
 class Item {
   var id: int
   var name: string
   var price: int
 
+  // This constructor is for creating the object of the class
   constructor(id: int, name: string, price: int)
     requires price >= 0
     ensures this.id == id
@@ -15,9 +17,13 @@ class Item {
   }
 }
 
+// This class is defined to represent the noraml item which we add into the cart
+
 class CartItem {
   var item: Item
   var quantity: int
+
+  // This constructor is for creating the object of the class
 
   constructor(item: Item, quantity: int)
     requires quantity > 0
@@ -29,11 +35,15 @@ class CartItem {
   }
 }
 
+
+// This predicate checks if the particular cart item is valid or not
 predicate ValidCartItem(c: CartItem)
   reads c, c.item
 {
   c.quantity > 0 && c.item.price >= 0
 }
+
+// This predicate checks if the all cart itemss are valid or not
 
 predicate ValidItems(m: map<int, CartItem>)
   reads *
@@ -41,15 +51,19 @@ predicate ValidItems(m: map<int, CartItem>)
   forall id :: id in m ==> ValidCartItem(m[id])
 }
 
+
+// This class is defined to simulate a ShoppingCart experience where we do the CRUD operations
 class ShoppingCart {
   var items: map<int, CartItem>
 
+// This constructor is used to start the cart off with an empty one , just like the one at store
   constructor()
     ensures items == map[]
   {
     items := map[];
   }
 
+// This method adds an item to the cart 
 method AddItem(item: Item, quantity: int)
   requires quantity > 0
   requires item.price >= 0
@@ -59,23 +73,23 @@ method AddItem(item: Item, quantity: int)
   ensures ValidCartItem(items[item.id])
   ensures ValidItems(items)
 {
-  assert ValidItems(items);  // Ensure validity before adding an item
+  assert ValidItems(items);  // This assertion will ensure validity before adding an item
   if item.id in items {
     var existing := items[item.id];
     assert ValidCartItem(existing);  // So we can trust existing.quantity > 0
     var newQ := existing.quantity + quantity;
-    assert newQ > 0;                 // Dafny can now prove this
+    assert newQ > 0;                 // using Dafny can now prove this
     var updated := new CartItem(item, newQ);
     items := items[item.id := updated];
   } else {
     var newItem := new CartItem(item, quantity);
     items := items[item.id := newItem];
   }
-  assert ValidCartItem(items[item.id]);
-  assert ValidItems(items);  // Ensure validity after modifying the cart
+  assert ValidCartItem(items[item.id]); // This acts as a Postcondition check
+  assert ValidItems(items);  // This assertion will ensure validity after modifying the cart
 }
 
-
+ // This method will Delete an item from the cart
 method DeleteItem(item: Item)
   requires item.id in items
   requires ValidItems(items)
@@ -83,11 +97,12 @@ method DeleteItem(item: Item)
   ensures item.id !in items
   ensures ValidItems(items)
 {
-  assert item.id in items;  // Explicitly check that the item exists in the cart before deletion
+  assert item.id in items;  // here we can check that the item exists in the cart before deletion
   items := items - {item.id};
-  assert ValidItems(items);  // Ensure the validity of the cart after the deletion
+  assert ValidItems(items);  // this assertion will ensure the validity of the cart after the deletion
 }
 
+  // This method Changes the quantity of an existing item in the cart
 
   method ChangeQuantity(item: Item, newQuantity: int)
     requires item.id in items
@@ -99,12 +114,15 @@ method DeleteItem(item: Item)
     ensures ValidItems(items)
   {
     var existing := items[item.id];
-    assert ValidCartItem(existing);  // ✅ So we can trust item.price >= 0
+    assert ValidCartItem(existing);  // here ,  we can trust item.price >= 0
     var updated := new CartItem(existing.item, newQuantity);
     items := items[item.id := updated];
     assert ValidCartItem(items[item.id]);
     assert ValidItems(items);
   }
+
+    // In this Ghost method we are computing the total cost of items in the cart
+
 
   ghost method TotalCost() returns (total: int)
     requires ValidItems(items)
@@ -131,6 +149,9 @@ method DeleteItem(item: Item)
     }
   }
 
+
+  //In this method  , we Return a snapshot (copy) of the current cart
+
   method Checkout() returns (snapshot: map<int, CartItem>)
     ensures snapshot == items
   {
@@ -144,6 +165,8 @@ method DeleteItem(item: Item)
     var x :| x in s;
     x
   }
+
+  //In this Ghost method  , we  convert a set of keys into a sequence
 
   ghost method KeysToSeq(keys: set<int>) returns (seqOut: seq<int>)
     ensures (forall x :: x in keys ==> x in seqOut)
@@ -161,9 +184,11 @@ method DeleteItem(item: Item)
   }
 }
 
+// Sample test method to simulate a mini cart session
+
 method Main() {
-  var item1 := new Item(1, "Laptop", 100000);
-  var item2 := new Item(2, "Mouse", 2500);
+  var item1 := new Item(1, "Bat", 10000);
+  var item2 := new Item(2, "Ball", 7500);
   var cart := new ShoppingCart();
 
   assert ValidItems(cart.items);  // Ensure the cart is valid before any operations
