@@ -9,7 +9,7 @@ using System;
 using System.Numerics;
 using System.Collections;
 [assembly: DafnyAssembly.DafnySourceAttribute(@"// dafny 4.10.0.0
-// Command Line Options: /compile:1 /out:Group9DafnySpecification.cs Group9DafnySpecification.dfy
+// Command Line Options: Group9DafnySpecification.dfy
 // Group9DafnySpecification.dfy
 
 predicate ValidCartItem(c: CartItem)
@@ -31,8 +31,8 @@ predicate ValidItems(m: map<int, CartItem>)
 
 method Main(_noArgsParameter: seq<seq<char>>)
 {
-  var item1 := new Item(1, ""Laptop"", 100000);
-  var item2 := new Item(2, ""Mouse"", 2500);
+  var item1 := new Item(1, ""Bat"", 10000);
+  var item2 := new Item(2, ""Ball"", 7500);
   var cart := new ShoppingCart();
   assert ValidItems(cart.items);
   cart.AddItem(item1, 1);
@@ -5888,11 +5888,11 @@ namespace _module {
     {
       Item _0_item1;
       Item _nw0 = new Item();
-      _nw0.__ctor(BigInteger.One, Dafny.Sequence<Dafny.Rune>.UnicodeFromString("Laptop"), new BigInteger(100000));
+      _nw0.__ctor(BigInteger.One, Dafny.Sequence<Dafny.Rune>.UnicodeFromString("Bat"), new BigInteger(10000));
       _0_item1 = _nw0;
       Item _1_item2;
       Item _nw1 = new Item();
-      _nw1.__ctor(new BigInteger(2), Dafny.Sequence<Dafny.Rune>.UnicodeFromString("Mouse"), new BigInteger(2500));
+      _nw1.__ctor(new BigInteger(2), Dafny.Sequence<Dafny.Rune>.UnicodeFromString("Ball"), new BigInteger(7500));
       _1_item2 = _nw1;
       ShoppingCart _2_cart;
       ShoppingCart _nw2 = new ShoppingCart();
